@@ -409,7 +409,12 @@ uploaded_file = st.file_uploader(
     type=["csv"],
     help="Upload a CSV file containing network traffic features. The model expects pre-defined columns.",
 )
+MAX_ROWS = 100000
 
+if len(df_raw) > MAX_ROWS:
+    df_raw = df_raw.sample(MAX_ROWS, random_state=42)
+    st.warning(f"Dataset too large. Randomly sampled {MAX_ROWS:,} rows.")
+    
 # ─── Main Logic ───────────────────────────────────────────────────────────────
 if uploaded_file is None:
     st.markdown("""
