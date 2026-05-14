@@ -45,3 +45,11 @@ if uploaded_file is not None:
 
     st.write(f"Normal: {y_pred.count(0)}")
     st.write(f"Anomalies: {y_pred.count(1)}")
+
+total = len(y_pred)
+
+normal_percent = (y_pred.count(0) / total) * 100
+anomaly_percent = (y_pred.count(1) / total) * 100
+
+st.write(f"Normal Traffic: {normal_percent:.2f}%")
+st.write(f"Anomalous Traffic: {anomaly_percent:.2f}%")
